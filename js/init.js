@@ -153,7 +153,7 @@ function init() {
                             (camera.position.z - player.position.z))
                     },
                     ' ': {
-                        velocity: 1.8,
+                        velocity: 0,
                         jump: 1,
                         rotation: Math.atan2(
                             (-camera.position.x - -player.position.x), 
