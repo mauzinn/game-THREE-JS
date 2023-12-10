@@ -14,8 +14,6 @@ function init() {
 
 
     //Configurations
-        let rotationY = 0
-        let Yrotation = 0
         let KeyPress = false
 
         const loader = new GLTFLoader()
@@ -120,7 +118,7 @@ function init() {
 
         //Box
             const boxGeometry = new THREE.BoxGeometry(1, 1, 1)
-            const boxMaterial = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('textures/box.jpeg') })
+            const boxMaterial = new THREE.MeshBasicMaterial({ color: 0x00FFFF, wireframe: true })
             const box = new THREE.Mesh(boxGeometry, boxMaterial)
             const boxBody = new CANNON.Body({
                 shape: new CANNON.Box(new CANNON.Vec3(1 / 3, 1 / 3, 1 / 3)),
@@ -139,43 +137,38 @@ function init() {
 
         //Movement player
             document.addEventListener('keydown', (e) => {
-                let movementValues = {
+                let movimentValues = {
                     w: {
-                        z: 1.8,
-                        x: 0,
-                        y: 0,
+                        velocity: 1.8,
+                        jump: 0,
                         rotation: Math.atan2(
                             (-camera.position.x - -player.position.x), 
                             (-camera.position.z - -player.position.z))
                     },
                     s: {
-                        z: -1.8,
-                        x: 0,
-                        y: 0,
+                        velocity: -1.8,
+                        jump: 0,
                         rotation: Math.atan2(
                             (camera.position.x - player.position.x), 
                             (camera.position.z - player.position.z))
                     },
                     ' ': {
-                        z: 0,
-                        x: 0,
-                        y: 1,
+                        velocity: 1.8,
+                        jump: 1,
                         rotation: Math.atan2(
                             (-camera.position.x - -player.position.x), 
                             (-camera.position.z - -player.position.z))
                     },
                     Shift: {
-                        z: 3.16,
-                        x: 0,
-                        y: 0,
+                        velocity: 3.12,
+                        jump: 0,
                         rotation: Math.atan2(
                             (-camera.position.x - -player.position.x), 
                             (-camera.position.z - -player.position.z))
                     }
                 }
-                const Movement = movementValues[e.key]
 
-                const moveSpeed = Movement.z
+                const moveSpeed = movimentValues[e.key].velocity
 
                 // Obtém a direção para a qual a câmera está olhando
                 const cameraDirection = new THREE.Vector3(0, 0, -1)
@@ -183,8 +176,8 @@ function init() {
                 
                 const velocity = new CANNON.Vec3(cameraDirection.x, 0, cameraDirection.z).scale(moveSpeed)
                 playerBody.velocity.copy(velocity)
-
-                robot.rotation.y = Movement.rotation
+                
+                robot.rotation.y = movimentValues[e.key].rotation
             })
 
             document.addEventListener('keyup', () => {
