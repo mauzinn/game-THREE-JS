@@ -110,7 +110,7 @@ function init() {
             const wall = new THREE.Mesh(wallGeometry, wallMaterial)
 
             const wallBody = new CANNON.Body({
-                shape: new CANNON.Box(new CANNON.Vec3(8 / 2, 5, 1 / 1.3)),
+                shape: new CANNON.Box(new CANNON.Vec3(8 / 2, 5 / 2, 1 / 1.3)),
                 type: CANNON.Body.STATIC,
                 position: new CANNON.Vec3(3, 2.8, 5)
             })
@@ -154,7 +154,7 @@ function init() {
                     },
                     ' ': {
                         velocity: 0,
-                        jump: 1,
+                        jump: 0.1,
                         rotation: Math.atan2(
                             (-camera.position.x - -player.position.x), 
                             (-camera.position.z - -player.position.z))
