@@ -139,14 +139,14 @@ function init() {
             document.addEventListener('keydown', (e) => {
                 let movimentValues = {
                     w: {
-                        velocity: 1.8,
+                        velocity: 2.12,
                         jump: 0,
                         rotation: Math.atan2(
                             (-camera.position.x - -player.position.x), 
                             (-camera.position.z - -player.position.z))
                     },
                     s: {
-                        velocity: -1.8,
+                        velocity: -2.12,
                         jump: 0,
                         rotation: Math.atan2(
                             (camera.position.x - player.position.x), 
@@ -160,7 +160,7 @@ function init() {
                             (-camera.position.z - -player.position.z))
                     },
                     Shift: {
-                        velocity: 3.12,
+                        velocity: 4.24,
                         jump: 0,
                         rotation: Math.atan2(
                             (-camera.position.x - -player.position.x), 
